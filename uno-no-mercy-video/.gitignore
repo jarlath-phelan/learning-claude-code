@@ -1,0 +1,18 @@
+# Build artifacts
+/target/
+
+# Output files (generated at runtime)
+/output/frames/
+/output/audio/
+# Keep the final video but ignore other generated mp4s
+!/output/uno_no_mercy.mp4
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
