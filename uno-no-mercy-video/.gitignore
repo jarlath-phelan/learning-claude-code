@@ -4,7 +4,8 @@
 # Output files (generated at runtime)
 /output/frames/
 /output/audio/
-/output/*.mp4
+# Keep the final video but ignore other generated mp4s
+!/output/uno_no_mercy.mp4
 
 # IDE
 .idea/
