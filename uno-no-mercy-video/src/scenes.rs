@@ -7,7 +7,7 @@ use image::{Rgba, RgbaImage};
 
 use crate::character::{Character, Expression};
 use crate::cards::{Card, CardColor, CardFactory, CardRenderer};
-use crate::effects::{Easing, Fade, Flash, PopIn, ScreenShake, Slide};
+use crate::effects::{Easing, Fade, Flash, Glow, Particles, PopIn, ScreenShake, Slide};
 use crate::text::{AnimatedText, LowerThird, TextRenderer, TextStyle, TitleCard};
 use crate::video::{Backgrounds, FrameComposer};
 use crate::{VIDEO_HEIGHT, VIDEO_WIDTH};
@@ -92,8 +92,12 @@ impl SceneManager {
     fn render_scene_1_hook(&self, time: f32, _frame_num: u32) -> Result<RgbaImage> {
         let progress = self.scenes[0].progress(time);
 
-        // Background - dark with UNO colors
-        let mut frame = Backgrounds::uno_theme(VIDEO_WIDTH, VIDEO_HEIGHT, time);
+        // Background - dramatic dark with moving lights
+        let mut frame = Backgrounds::dramatic_dark(VIDEO_WIDTH, VIDEO_HEIGHT, time);
+
+        // Add floating sparkles
+        let sparkles = Particles::sparkles(VIDEO_WIDTH, VIDEO_HEIGHT, 15, time, 42);
+        self.composer.composite(&mut frame, &sparkles, 0, 0);
 
         // Determine expression based on timing
         let expression = if progress < 0.3 {
@@ -104,11 +108,12 @@ impl SceneManager {
             Expression::Shocked
         };
 
-        // Character - zoom in effect
+        // Character - zoom in effect with subtle bounce
         let base_scale = 1.5;
         let zoom_scale = if progress > 0.5 {
             let zoom_progress = (progress - 0.5) * 2.0;
-            base_scale + Easing::ease_out(zoom_progress) * 0.5
+            let bounce = (zoom_progress * 10.0).sin() * 0.02 * (1.0 - zoom_progress);
+            base_scale + Easing::ease_out(zoom_progress) * 0.5 + bounce
         } else {
             base_scale
         };
@@ -118,7 +123,7 @@ impl SceneManager {
         let char_y = VIDEO_HEIGHT as i32 - char_img.height() as i32 + 100;
         self.composer.composite(&mut frame, &char_img, char_x, char_y);
 
-        // Title text - "UNO NO MERCY" with shake effect
+        // Title text - "UNO NO MERCY" with glow and shake effect
         if progress > 0.4 {
             let text_progress = (progress - 0.4) / 0.6;
             let scale = PopIn::get_scale(text_progress, 1.2);
@@ -127,19 +132,29 @@ impl SceneManager {
                 let style = TextStyle::red_bold();
                 let title = self.text_renderer.render("UNO NO MERCY", 120.0 * scale, &style);
 
+                // Add glow to title
+                let glowing_title = Glow::apply(&title, Rgba([255, 100, 50, 180]), 15, 0.8);
+
                 // Add shake
                 let shake = if progress > 0.6 {
                     let shake_time = progress - 0.6;
-                    let intensity = 8.0 * (1.0 - shake_time * 2.0).max(0.0);
+                    let intensity = 10.0 * (1.0 - shake_time * 2.0).max(0.0);
                     AnimatedText::shake_offset(shake_time * 20.0, intensity)
                 } else {
                     (0, 0)
                 };
 
-                let x = (VIDEO_WIDTH as i32 - title.width() as i32) / 2 + shake.0;
-                let y = (VIDEO_HEIGHT as f32 * 0.25) as i32 + shake.1;
-                self.composer.composite(&mut frame, &title, x, y);
+                let x = (VIDEO_WIDTH as i32 - glowing_title.width() as i32) / 2 + shake.0;
+                let y = (VIDEO_HEIGHT as f32 * 0.22) as i32 + shake.1;
+                self.composer.composite(&mut frame, &glowing_title, x, y);
             }
+        }
+
+        // Energy wave effect at reveal
+        if progress > 0.4 && progress < 0.7 {
+            let wave_time = (progress - 0.4) / 0.3;
+            let wave = Particles::energy_wave(VIDEO_WIDTH, VIDEO_HEIGHT, wave_time * 2.0, Rgba([255, 200, 100, 80]));
+            self.composer.composite(&mut frame, &wave, 0, 0);
         }
 
         // Flash effect at the reveal
@@ -150,13 +165,13 @@ impl SceneManager {
             } else {
                 (1.0 - flash_progress) * 2.0
             };
-            let flash = Flash::white(VIDEO_WIDTH, VIDEO_HEIGHT, flash_intensity * 0.6);
+            let flash = Flash::white(VIDEO_WIDTH, VIDEO_HEIGHT, flash_intensity * 0.7);
             self.composer.composite(&mut frame, &flash, 0, 0);
         }
 
         // Fade from black at start
-        if progress < 0.1 {
-            let fade = Fade::from_black(VIDEO_WIDTH, VIDEO_HEIGHT, progress * 10.0);
+        if progress < 0.15 {
+            let fade = Fade::from_black(VIDEO_WIDTH, VIDEO_HEIGHT, progress / 0.15);
             self.composer.composite(&mut frame, &fade, 0, 0);
         }
 
@@ -356,9 +371,14 @@ impl SceneManager {
         let progress = self.scenes[3].progress(time);
         let local_time = time - self.scenes[3].start;
 
-        // Dramatic spotlight background
-        let spotlight_x = 0.5 + (time * 0.5).sin() * 0.1;
-        let mut frame = Backgrounds::spotlight(VIDEO_WIDTH, VIDEO_HEIGHT, spotlight_x, 0.4, 0.8);
+        // Dramatic spotlight background with movement
+        let spotlight_x = 0.5 + (time * 0.4).sin() * 0.15;
+        let spotlight_y = 0.4 + (time * 0.3).cos() * 0.05;
+        let mut frame = Backgrounds::spotlight(VIDEO_WIDTH, VIDEO_HEIGHT, spotlight_x, spotlight_y, 0.9);
+
+        // Add subtle sparkles
+        let sparkles = Particles::sparkles(VIDEO_WIDTH, VIDEO_HEIGHT, 10, time, 123);
+        self.composer.composite(&mut frame, &sparkles, 0, 0);
 
         // Character gets serious
         let expression = if local_time < 4.0 {
@@ -464,11 +484,22 @@ impl SceneManager {
         let progress = self.scenes[4].progress(time);
         let local_time = time - self.scenes[4].start;
 
-        // Chaotic background
+        // Chaotic background with enhanced effects
         let mut frame = Backgrounds::chaos(VIDEO_WIDTH, VIDEO_HEIGHT, time, 42);
 
-        // Screen shake for chaos effect
-        let shake = ScreenShake::new(3.0 + progress * 5.0, 8.0);
+        // Add sparkles for chaos energy
+        let sparkles = Particles::sparkles(VIDEO_WIDTH, VIDEO_HEIGHT, 25 + (progress * 30.0) as usize, time, 99);
+        self.composer.composite(&mut frame, &sparkles, 0, 0);
+
+        // Energy waves during chaos
+        if (local_time * 2.0) as i32 % 3 == 0 {
+            let wave = Particles::energy_wave(VIDEO_WIDTH, VIDEO_HEIGHT, local_time, Rgba([255, 100, 100, 50]));
+            self.composer.composite(&mut frame, &wave, 0, 0);
+        }
+
+        // Screen shake for chaos effect - intensifies
+        let shake_intensity = 3.0 + progress * 8.0;
+        let shake = ScreenShake::new(shake_intensity, 10.0);
         let (shake_x, shake_y) = shake.get_offset(time);
 
         // Character increasingly unhinged
@@ -609,12 +640,12 @@ impl SceneManager {
     fn render_scene_7_outro(&self, time: f32, _frame_num: u32) -> Result<RgbaImage> {
         let progress = self.scenes[6].progress(time);
 
-        // Dark background with UNO theme
-        let mut frame = Backgrounds::solid_with_vignette(
-            VIDEO_WIDTH, VIDEO_HEIGHT,
-            Rgba([20, 15, 25, 255]),
-            0.6
-        );
+        // Dramatic dark background
+        let mut frame = Backgrounds::dramatic_dark(VIDEO_WIDTH, VIDEO_HEIGHT, time);
+
+        // Add menacing sparkles
+        let sparkles = Particles::sparkles(VIDEO_WIDTH, VIDEO_HEIGHT, 12, time, 666);
+        self.composer.composite(&mut frame, &sparkles, 0, 0);
 
         // Character expression changes
         let expression = if progress < 0.5 {
@@ -671,7 +702,7 @@ impl SceneManager {
             }
         }
 
-        // Final question with evil emoji
+        // Final question with evil emoji and glow
         if progress > 0.6 {
             let final_progress = (progress - 0.6) / 0.4;
             let scale = PopIn::get_scale(final_progress, 0.8);
@@ -679,24 +710,30 @@ impl SceneManager {
             if scale > 0.1 {
                 let style = TextStyle::yellow_impact();
                 let question = self.text_renderer.render("who wants to play?", 80.0 * scale, &style);
-                let x = (VIDEO_WIDTH as i32 - question.width() as i32) / 2;
-                let y = (VIDEO_HEIGHT as f32 * 0.25) as i32;
-                self.composer.composite(&mut frame, &question, x, y);
 
-                // Devil emoji representation
+                // Add menacing glow
+                let glowing_question = Glow::apply(&question, Rgba([255, 200, 50, 150]), 12, 0.7);
+
+                let x = (VIDEO_WIDTH as i32 - glowing_question.width() as i32) / 2;
+                let y = (VIDEO_HEIGHT as f32 * 0.23) as i32;
+                self.composer.composite(&mut frame, &glowing_question, x, y);
+
+                // Devil emoji representation with glow
                 if final_progress > 0.5 {
                     let emoji_style = TextStyle {
-                        color: Rgba([200, 50, 50, 255]),
+                        color: Rgba([220, 50, 50, 255]),
                         outline_color: Some(Rgba([0, 0, 0, 255])),
-                        outline_width: 3,
+                        outline_width: 4,
                         shadow: true,
-                        shadow_offset: (4, 4),
-                        shadow_color: Rgba([0, 0, 0, 200]),
+                        shadow_offset: (5, 5),
+                        shadow_color: Rgba([0, 0, 0, 220]),
                     };
-                    let emoji = self.text_renderer.render(">:)", 120.0, &emoji_style);
-                    let emoji_x = (VIDEO_WIDTH as i32 - emoji.width() as i32) / 2;
-                    let emoji_y = (VIDEO_HEIGHT as f32 * 0.40) as i32;
-                    self.composer.composite(&mut frame, &emoji, emoji_x, emoji_y);
+                    let emoji = self.text_renderer.render(">:)", 140.0, &emoji_style);
+                    let glowing_emoji = Glow::apply(&emoji, Rgba([255, 80, 50, 180]), 18, 1.0);
+
+                    let emoji_x = (VIDEO_WIDTH as i32 - glowing_emoji.width() as i32) / 2;
+                    let emoji_y = (VIDEO_HEIGHT as f32 * 0.38) as i32;
+                    self.composer.composite(&mut frame, &glowing_emoji, emoji_x, emoji_y);
                 }
             }
         }
