@@ -1,0 +1,68 @@
+# Generic TikTok Explainer Template
+
+## Fill in the blanks and paste into your AI video tool
+
+### Topic: [YOUR TOPIC HERE]
+
+---
+
+## Universal Prompt Template:
+
+Create a [LENGTH: 30/60/90 second] TikTok-style vertical video explaining [TOPIC].
+
+Style: [CHOOSE: Fast-paced / Educational / Humorous / Dramatic / Professional]
+Tone: [CHOOSE: Friendly / Authoritative / Playful / Urgent / Mysterious]
+Format: 9:16 vertical, bold text overlays, [TRANSITION STYLE: quick cuts / smooth fades / zoom effects]
+
+### Script Structure:
+
+**Hook (0-5 seconds):**
+"[SURPRISING FACT OR QUESTION THAT CREATES CURIOSITY]"
+
+**Problem/Context (5-15 seconds):**
+"[WHY THIS MATTERS / WHAT MOST PEOPLE GET WRONG]"
+
+**Main Content (15-45 seconds):**
+"[3-5 KEY POINTS, EACH WITH A MEMORABLE PHRASE]"
+- Point 1: [FACT + IMPACT]
+- Point 2: [FACT + IMPACT]
+- Point 3: [FACT + IMPACT]
+
+**Twist/Revelation (45-55 seconds):**
+"[THE THING NOBODY TELLS YOU / THE REAL SECRET]"
+
+**Call to Action (55-60 seconds):**
+"[WHAT SHOULD THEY DO NOW / MEMORABLE CLOSING]"
+
+### Visual Requirements:
+- Key statistics as text overlays
+- [TOPIC-RELEVANT IMAGERY]
+- Emphasis effects on important words
+- [COLOR SCHEME THAT MATCHES TOPIC]
+- Professional but engaging aesthetic
+
+---
+
+## Quick Prompts by Platform:
+
+### InVideo AI:
+"Create a viral TikTok video about [TOPIC]. Make it [TONE] with bold text overlays and quick transitions. Hook viewers in the first 3 seconds with [HOOK]. Include [3 KEY FACTS]."
+
+### Synthesia:
+"Script: [FULL SCRIPT]. Use a [DEMOGRAPHIC] avatar with [ENERGY LEVEL] energy. Include gestures for emphasis on key points."
+
+### Canva AI:
+"Make a TikTok explaining [TOPIC]. Style: [AESTHETIC]. Include: [LIST OF 5 KEY POINTS]. Use [COLORS] color scheme."
+
+### Revid.ai:
+"Topic: [TOPIC]. Viral style. Key points: [BULLET LIST]. Tone: [TONE]. Must include hook about [SURPRISING ELEMENT]."
+
+---
+
+## Optimization Tips:
+
+1. **First 3 seconds are everything** - Lead with controversy, question, or shock
+2. **Use numbers** - "5 things" performs better than "some things"
+3. **Pattern interrupt** - Change visuals every 3-5 seconds
+4. **Text on screen** - 80% of TikTok is watched on mute
+5. **End with engagement** - Question, challenge, or cliffhanger

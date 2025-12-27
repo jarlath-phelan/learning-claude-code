@@ -1,0 +1,65 @@
+# Financial Basics Explainer - AI Video Prompts
+
+## For InVideo AI / Revid.ai
+
+### Main Prompt:
+Create a 60-second TikTok-style vertical video explaining basic financial concepts for beginners.
+
+Style: Approachable, slightly humorous, uses relatable analogies
+Tone: Like a smart friend explaining money stuff at a coffee shop
+Format: 9:16 vertical, bold text overlays, clean animations
+
+Script to follow:
+"Nobody taught you this in school, so let me break it down.
+
+The 50/30/20 rule. 50% of your income goes to NEEDS - rent, food, bills. 30% goes to WANTS - Netflix, coffee, that thing you'll use twice. 20% goes to SAVINGS. Non-negotiable.
+
+Emergency fund. You need 3-6 months of expenses saved. Why? Because life WILL punch you in the face. Car breaks down. You get laid off. Medical bill. This money is your shield.
+
+Compound interest is either your best friend or worst enemy. Put $200 a month into an index fund starting at 25? You'll have over a MILLION by retirement. Start at 35? Half that. Time is the cheat code.
+
+Credit cards aren't free money. That 24% APR means a $1000 purchase becomes $1240 if you only pay minimums for a year. Pay it off. Every. Single. Month.
+
+Your 401k match is FREE MONEY. If your employer matches 4%, contribute at LEAST 4%. Otherwise you're literally saying no to free cash.
+
+Start today. Not tomorrow. Today."
+
+Visual requirements:
+- Pie chart for 50/30/20 split
+- Money/coins animations
+- Growth chart for compound interest
+- Credit card with warning signs
+- Clean, professional but not boring aesthetic
+- Green for good financial moves, red for warnings
+
+---
+
+## For Synthesia (Avatar-based)
+
+### Avatar Settings:
+- Avatar: Professional but approachable, casual business attire
+- Tone: Confident, encouraging, slight urgency
+- Background: Modern office or clean gradient
+
+### Scene Breakdown:
+1. (0-5s) Hook - "Nobody taught you this in school"
+2. (5-15s) 50/30/20 - Show pie chart, gesture to each section
+3. (15-25s) Emergency fund - Serious expression, punch analogy
+4. (25-40s) Compound interest - Excited about the math, show growth
+5. (40-50s) Credit cards - Warning tone, finger wag
+6. (50-55s) 401k - Emphasize "FREE MONEY"
+7. (55-60s) CTA - Point at camera, "Start today"
+
+---
+
+## For Canva AI
+
+### Prompt:
+Create a TikTok video explaining 5 essential money rules everyone should know:
+1. The 50/30/20 budgeting rule
+2. Why you need an emergency fund
+3. How compound interest makes you rich
+4. Credit card APR trap
+5. 401k employer matching
+
+Style: Clean, modern, use green for positive money moves. Include animated charts and bold statistics. Make it feel empowering, not preachy. End with strong call-to-action.
