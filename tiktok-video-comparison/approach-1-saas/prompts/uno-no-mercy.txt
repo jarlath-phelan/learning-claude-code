@@ -1,0 +1,65 @@
+# UNO No Mercy Explainer - AI Video Prompts
+
+## For InVideo AI / Revid.ai
+
+### Main Prompt:
+Create a 60-75 second TikTok-style vertical video explaining UNO No Mercy card game rules.
+
+Style: Fast-paced, energetic, Gen-Z humor, dramatic reveals
+Tone: Playful but slightly menacing, like explaining a horror movie plot
+Format: 9:16 vertical, bold text overlays, quick cuts
+
+Script to follow:
+"So you think you know UNO? Nah. Let me tell you about NO MERCY.
+
+168 cards. SIX players max. And if you get 25 cards in your hand? You're DEAD. Eliminated. Gone. That's the Mercy Rule and there IS no mercy.
+
+Plus 2? That's cute. Plus 4? Getting warmer. PLUS 10. And guess what? You can STACK them. Someone hits you with a plus 4? Throw down a plus 6. Now THEY draw 10.
+
+But here's what NO ONE tells you. That plus 4? It's NOT a wild card anymore. It has a COLOR. Red plus 4 only plays on RED.
+
+Play a 7, you SWAP your entire hand with someone. Play a 0, EVERYONE passes their hand. Skip Everyone? You skip THE WHOLE TABLE.
+
+And if you can't play? You draw until you CAN play. No stopping. Just pain.
+
+This game has ended friendships. Who wants to play?"
+
+Visual requirements:
+- Show UNO cards flying/stacking
+- Text overlays for key numbers (168, 25, +10)
+- Dramatic zoom on reveals
+- Screen shake on impactful moments
+- Dark/dramatic background with UNO colors (red, blue, green, yellow)
+
+---
+
+## For Synthesia (Avatar-based)
+
+### Avatar Settings:
+- Avatar: Young, expressive presenter
+- Tone: Enthusiastic, slightly manic energy
+- Gestures: Animated, use hand movements for emphasis
+
+### Scene Breakdown:
+1. (0-3s) Hook - Avatar looks serious, then breaks into knowing smile
+2. (3-15s) Basics - Count on fingers, shocked expression at 25 cards
+3. (15-30s) Draw cards - Build excitement, mime card stacking
+4. (30-45s) Plot twist - Lean in like sharing a secret
+5. (45-60s) Chaos cards - Increasingly unhinged energy
+6. (60-70s) Golden rule - Dead serious face
+7. (70-75s) Outro - Evil smile, raised eyebrow
+
+---
+
+## For Canva AI
+
+### Prompt:
+Create a TikTok video about UNO No Mercy rules. Make it dramatic and fast-paced with bold text overlays. Include:
+- Hook: "UNO NO MERCY" title with impact
+- Stats: 168 cards, 6 players, 25 card elimination
+- Feature: +2, +4, +10 stacking rules
+- Twist: +4 has colors now
+- Chaos: Hand swapping and skip everyone
+- Ending: "Who wants to play?" with ominous tone
+
+Style: Dark background, neon UNO colors, screen shake effects, quick transitions

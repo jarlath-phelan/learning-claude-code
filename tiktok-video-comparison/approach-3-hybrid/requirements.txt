@@ -1,0 +1,18 @@
+# Hybrid Approach Dependencies
+
+# AI Image Generation
+replicate>=0.25.0
+openai>=1.0.0
+httpx>=0.25.0
+
+# Image Processing
+Pillow>=10.0.0
+rembg>=2.0.50  # Background removal for characters
+
+# TTS
+edge-tts>=6.1.0
+
+# Utilities
+python-dotenv>=1.0.0
+rich>=13.0.0
+typer>=0.9.0
